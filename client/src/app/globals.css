@@ -1,0 +1,440 @@
+@import "tailwindcss";
+
+:root {
+  --background: #090D16;
+  --surface: #0F172A;
+  --surface-raised: #141E33;
+  --surface-sunken: #06090F;
+  --foreground: #F8FAFC;
+  --foreground-muted: #94A3B8;
+  --foreground-subtle: #64748B;
+  --border: #1E293B;
+  --border-subtle: #172033;
+  --border-strong: #334155;
+  --accent: #00E5FF; /* Electric Cyan */
+  --accent-hover: #38BDF8;
+  --accent-pink: #FF2A8D; /* Neon Magenta / Pink */
+  --accent-yellow: #FFCC00; /* Comic Action Gold */
+  --ink: #06080E;
+  --graphite: #1E293B;
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-medium: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-editorial: 0 12px 36px rgba(0, 0, 0, 0.6);
+  --shadow-cyan-glow: 0 0 25px rgba(0, 229, 255, 0.35);
+  --shadow-pink-glow: 0 0 25px rgba(255, 42, 141, 0.35);
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-subtle: var(--foreground-subtle);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-yellow: var(--accent-yellow);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Comic Display Font Bangers */
+.font-bangers {
+  font-family: var(--font-bangers), "Impact", "Arial Black", sans-serif;
+  letter-spacing: 0.03em;
+}
+
+/* Starry Dot Grid Background (like ComicsMaker.ai reference) */
+.comic-dot-grid {
+  background-color: #090D16;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.11) 1.25px, transparent 1.25px);
+  background-size: 20px 20px;
+}
+
+/* Comic Headline 3D Pop Effects */
+.comic-title-cyan {
+  color: #00E5FF;
+  text-shadow: 2px 2px 0px #000000, 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 24px rgba(0, 229, 255, 0.45);
+}
+
+.comic-title-pink {
+  color: #FF2A8D;
+  text-shadow: 2px 2px 0px #000000, 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 42, 141, 0.45);
+}
+
+.comic-title-yellow {
+  color: #FFCC00;
+  text-shadow: 2px 2px 0px #000000, 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 204, 0, 0.45);
+}
+
+.comic-title-stroke {
+  -webkit-text-stroke: 1.5px #000000;
+}
+
+/* High-Impact Hero Cyan Action Button */
+.comic-btn-cyan {
+  background: #00E5FF;
+  color: #06090F;
+  box-shadow: 0 4px 0px #0099AA, 0 10px 25px rgba(0, 229, 255, 0.4);
+  transition: all 0.15s ease;
+}
+.comic-btn-cyan:hover {
+  background: #38BDF8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0px #008899, 0 14px 30px rgba(0, 229, 255, 0.55);
+}
+.comic-btn-cyan:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px #008899, 0 4px 15px rgba(0, 229, 255, 0.3);
+}
+
+/* Custom Editorial Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground-muted);
+}
+
+/* Natural Physical Page Turn 3D Perspective */
+.comic-viewport {
+  perspective: 2800px;
+  transform-style: preserve-3d;
+}
+
+.page-flipper {
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+}
+
+.page-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.page-face-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.page-face-back {
+  z-index: 1;
+  transform: rotateY(180deg);
+}
+
+@keyframes flipNext {
+  0% {
+    transform: perspective(2800px) rotateY(0deg) rotateZ(0deg) skewY(0deg) scaleX(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  18% {
+    transform: perspective(2800px) rotateY(-32deg) rotateZ(-2.5deg) skewY(2deg) scaleX(0.98);
+    box-shadow: -18px 14px 40px rgba(0, 0, 0, 0.45);
+  }
+  48% {
+    transform: perspective(2800px) rotateY(-86deg) rotateZ(-4deg) skewY(3deg) scaleX(0.91);
+    box-shadow: -45px 25px 85px rgba(0, 0, 0, 0.7);
+  }
+  56% {
+    transform: perspective(2800px) rotateY(-98deg) rotateZ(-3deg) skewY(2.2deg) scaleX(0.92);
+    box-shadow: -48px 25px 85px rgba(0, 0, 0, 0.7);
+  }
+  82% {
+    transform: perspective(2800px) rotateY(-155deg) rotateZ(-1deg) skewY(0.8deg) scaleX(0.98);
+    box-shadow: -22px 12px 45px rgba(0, 0, 0, 0.4);
+  }
+  96% {
+    transform: perspective(2800px) rotateY(-181deg) rotateZ(0.2deg) skewY(-0.2deg) scaleX(1);
+    box-shadow: -4px 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: perspective(2800px) rotateY(-180deg) rotateZ(0deg) skewY(0deg) scaleX(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes flipPrev {
+  0% {
+    transform: perspective(2800px) rotateY(0deg) rotateZ(0deg) skewY(0deg) scaleX(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  18% {
+    transform: perspective(2800px) rotateY(32deg) rotateZ(2.5deg) skewY(-2deg) scaleX(0.98);
+    box-shadow: 18px 14px 40px rgba(0, 0, 0, 0.45);
+  }
+  48% {
+    transform: perspective(2800px) rotateY(86deg) rotateZ(4deg) skewY(-3deg) scaleX(0.91);
+    box-shadow: 45px 25px 85px rgba(0, 0, 0, 0.7);
+  }
+  56% {
+    transform: perspective(2800px) rotateY(98deg) rotateZ(3deg) skewY(-2.2deg) scaleX(0.92);
+    box-shadow: 48px 25px 85px rgba(0, 0, 0, 0.7);
+  }
+  82% {
+    transform: perspective(2800px) rotateY(155deg) rotateZ(1deg) skewY(-0.8deg) scaleX(0.98);
+    box-shadow: 22px 12px 45px rgba(0, 0, 0, 0.4);
+  }
+  96% {
+    transform: perspective(2800px) rotateY(181deg) rotateZ(-0.2deg) skewY(0.2deg) scaleX(1);
+    box-shadow: 4px 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: perspective(2800px) rotateY(180deg) rotateZ(0deg) skewY(0deg) scaleX(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.page-flipper.turning-next {
+  animation: flipNext 0.42s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.page-flipper.turning-prev {
+  animation: flipPrev 0.42s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Smooth Viewport & Tab Transitions */
+.tab-fade-enter {
+  animation: tabFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Paper Curl Specular Highlight traveling across the page */
+@keyframes curlHighlightNext {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  30% {
+    opacity: 0.65;
+    transform: translateX(35%);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateX(-15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes curlHighlightPrev {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  30% {
+    opacity: 0.65;
+    transform: translateX(-35%);
+  }
+  60% {
+    opacity: 0.7;
+    transform: translateX(15%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.curl-sheen-next {
+  animation: curlHighlightNext 1.3s cubic-bezier(0.3, 0.05, 0.2, 1) forwards;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(0, 0, 0, 0.35) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.curl-sheen-prev {
+  animation: curlHighlightPrev 1.3s cubic-bezier(0.3, 0.05, 0.2, 1) forwards;
+  background: linear-gradient(
+    -90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 45%,
+    rgba(0, 0, 0, 0.35) 75%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Cast shadow on opposite page during turn */
+@keyframes castShadowNext {
+  0% { opacity: 0; transform: scaleX(0.1); }
+  45% { opacity: 0.75; transform: scaleX(1); }
+  85% { opacity: 0.2; transform: scaleX(0.4); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+
+@keyframes castShadowPrev {
+  0% { opacity: 0; transform: scaleX(0.1); }
+  45% { opacity: 0.75; transform: scaleX(1); }
+  85% { opacity: 0.2; transform: scaleX(0.4); }
+  100% { opacity: 0; transform: scaleX(0); }
+}
+
+.cast-shadow-right {
+  animation: castShadowNext 1.3s cubic-bezier(0.3, 0.05, 0.2, 1) forwards;
+  background: linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 65%, transparent 100%);
+  transform-origin: left center;
+}
+
+.cast-shadow-left {
+  animation: castShadowPrev 1.3s cubic-bezier(0.3, 0.05, 0.2, 1) forwards;
+  background: linear-gradient(to left, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 65%, transparent 100%);
+  transform-origin: right center;
+}
+
+/* Underwater floating air bubbles */
+@keyframes floatBubble {
+  0% {
+    transform: translateY(100%) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-120%) scale(1.1);
+    opacity: 0;
+  }
+}
+.bubble-float-1 { animation: floatBubble 4s ease-in-out infinite; }
+.bubble-float-2 { animation: floatBubble 5.2s ease-in-out infinite 1.2s; }
+.bubble-float-3 { animation: floatBubble 3.6s ease-in-out infinite 2.1s; }
+.bubble-float-4 { animation: floatBubble 4.5s ease-in-out infinite 0.7s; }
+
+/* Cyber electric lightning pulse */
+@keyframes electricArc {
+  0%, 100% {
+    opacity: 0.3;
+    filter: drop-shadow(0 0 4px #00E5FF);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px #00E5FF) drop-shadow(0 0 28px #10B981);
+  }
+}
+.electric-pulse {
+  animation: electricArc 2s ease-in-out infinite;
+}
+
+/* Solar Flare Rays Animation */
+@keyframes solarPulse {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.15) rotate(5deg);
+    opacity: 0.85;
+  }
+}
+.solar-flare {
+  animation: solarPulse 3.5s ease-in-out infinite;
+}
+
+/* Sound FX Pop Bounce */
+@keyframes comicPopBounce {
+  0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(4deg); opacity: 1; }
+  80% { transform: scale(0.95) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.comic-pop-enter {
+  animation: comicPopBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Constellation twinkle */
+@keyframes constellationGlow {
+  0%, 100% { opacity: 0.35; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+.constellation-star {
+  animation: constellationGlow 2.5s ease-in-out infinite;
+}
+
+/* Manga screentone overlay effect */
+.screentone-dot {
+  background-image: radial-gradient(currentColor 1.2px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+
+/* Comic Speech Bubble styles */
+.bubble-speech {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #111110;
+  border-radius: 18px;
+}
+
+.bubble-thought {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid #111110;
+  border-radius: 24px;
+  border-style: dashed;
+}
+
+.bubble-shout {
+  position: relative;
+  background: #ffffff;
+  border: 2.5px solid #111110;
+  clip-path: polygon(0% 10%, 15% 0%, 35% 8%, 50% 0%, 65% 9%, 85% 0%, 100% 10%, 93% 35%, 100% 50%, 92% 70%, 100% 90%, 85% 100%, 65% 92%, 50% 100%, 35% 93%, 15% 100%, 0% 90%, 8% 70%, 0% 50%, 7% 30%);
+}
+
+.bubble-narration {
+  background: #FAF6ED;
+  border: 2px solid #111110;
+  box-shadow: 3px 3px 0px #111110;
+}
+
+.bubble-whisper {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px dashed #55534E;
+  border-radius: 14px;
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-flipper {
+    transition: none !important;
+  }
+}

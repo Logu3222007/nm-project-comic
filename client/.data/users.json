@@ -1,0 +1,22 @@
+[
+  {
+    "id": "usr_1790676046619_ca9de560",
+    "name": "barath",
+    "email": "barath@gmail.com",
+    "avatarUrl": "https://api.dicebear.com/7.x/identicon/svg?seed=barath%40gmail.com",
+    "role": "creator",
+    "plan": "studio-pro",
+    "credits": 100000,
+    "tokenUsage": 0,
+    "totalComicsCreated": 0,
+    "verified": true,
+    "authProvider": "email",
+    "passwordHash": "eb43e0b84f91d2d28ab08d19584add82:d04583a0e5d7541dfbe90327ab58036b355346c6db0b6cc58ad0aa7ec3cd9a044d6aa2eaa3e7fedfb47248f90e2cc4082a5ad6d0252bcbcb359911e208f88583",
+    "createdAt": "2026-09-29T10:00:46.703Z",
+    "updatedAt": "2026-09-29T10:00:46.703Z",
+    "routine": "Morning Scripting & World-Building • Evening Panel Inking & Visual Synthesis",
+    "thinkingLevel": "Level 9: Multiverse Architect",
+    "imaginationScore": 98,
+    "creativeLevel": "Master Storyteller (Top 1%)"
+  }
+]
